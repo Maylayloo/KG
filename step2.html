@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>O tak</title>
+    <link rel="stylesheet" href="step2style.css">
+</head>
+<body>
+<video id="myVideo" controls autoplay muted>
+    <source src="mov1.mp4" type="video/mp4">
+</video>
+<script>
+    window.onload = function() {
+        window.moveTo(0, 0);
+        window.resizeTo(screen.width, screen.height);
+        openNewWindow();
+    }
+
+    function openNewWindow() {
+        let newWindow = window.open('', '', 'width=400,height=400');
+
+        let img = document.createElement('img');
+        img.src = 'gawron.png';
+
+        newWindow.document.body.appendChild(img);
+
+        // Odtwarzaj dźwięk 'bomb.mp3' w nowym oknie
+        var audio = new Audio('bomb.mp3'); // Zastąp URL swoim dźwiękiem
+        audio.play();
+
+        let x = 0;
+        let y = 0;
+
+        let interval = 10;
+
+        function moveWindow() {
+            newWindow.moveTo(x, y);
+
+            x += 15;
+            y += 15;
+
+            if (x > screen.width || y > screen.height) {
+                x = 0;
+                y = 0;
+            }
+        }
+
+        setInterval(moveWindow, interval);
+
+        // Otwórz kolejne okno po pewnym czasie
+        setTimeout(openNewWindow, 2000);
+    }
+</script>
+</body>
+</html>
